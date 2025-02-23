@@ -1,0 +1,134 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <!-- Servlet Declarations and Mappings -->
+
+    <!-- TripListServlet Configuration for Dashboard -->
+    <servlet>
+        <servlet-name>TripListServlet</servlet-name>
+        <servlet-class>com.example.servlet.TripListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TripListServlet</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+
+    <!-- TripDetailsServlet Configuration -->
+    <servlet>
+        <servlet-name>TripDetailsServlet</servlet-name>
+        <servlet-class>com.example.servlet.TripDetailsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TripDetailsServlet</servlet-name>
+        <url-pattern>/tripDetails</url-pattern>
+    </servlet-mapping>
+
+    <!-- ProcessBookingServlet Configuration -->
+    <servlet>
+        <servlet-name>ProcessBookingServlet</servlet-name>
+        <servlet-class>com.example.servlet.ProcessBookingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcessBookingServlet</servlet-name>
+        <url-pattern>/processBooking</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin Specific Servlet Configurations -->
+
+    <!-- AddTripServlet Configuration -->
+    <servlet>
+        <servlet-name>AddTripServlet</servlet-name>
+        <servlet-class>com.example.servlet.AddTripServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddTripServlet</servlet-name>
+        <url-pattern>/admin/addTrip</url-pattern>
+    </servlet-mapping>
+
+    <!-- EditTripServlet Configuration -->
+    <servlet>
+        <servlet-name>EditTripServlet</servlet-name>
+        <servlet-class>com.example.servlet.EditTripServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditTripServlet</servlet-name>
+        <url-pattern>/admin/editTrip</url-pattern>
+    </servlet-mapping>
+
+    <!-- DeleteTripServlet Configuration -->
+    <servlet>
+        <servlet-name>DeleteTripServlet</servlet-name>
+        <servlet-class>com.example.servlet.DeleteTripServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteTripServlet</servlet-name>
+        <url-pattern>/admin/deleteTrip</url-pattern>
+    </servlet-mapping>
+
+    <!-- UpdateTripServlet Configuration -->
+    <servlet>
+        <servlet-name>UpdateTripServlet</servlet-name>
+        <servlet-class>com.example.servlet.UpdateTripServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateTripServlet</servlet-name>
+        <url-pattern>/admin/updateTrip</url-pattern>
+    </servlet-mapping>
+
+    <!-- BookingServlet Configuration -->
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>com.example.servlet.BookingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/book</url-pattern>
+    </servlet-mapping>
+
+    <!-- Filter Declaration for Authentication -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.example.filter.AuthenticationFilter</filter-class>
+    </filter>
+
+    <!-- Filter Mapping to Protect User and Admin Pages -->
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <!-- Protecting user and admin pages -->
+        <url-pattern>/dashboard</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/tripDetails</url-pattern>
+        <url-pattern>/book</url-pattern>
+    </filter-mapping>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Define User and Admin Roles -->
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+
+    <!-- Login Configuration -->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login.jsp?error=invalid_credentials</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <!-- Session Configuration -->
+    <session-config>
+        <session-timeout>30</session-timeout> <!-- Timeout in minutes -->
+    </session-config>
+
+</web-app>
